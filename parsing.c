@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     mpc_parser_t* Number     = mpc_new("number");
     mpc_parser_t* Operator   = mpc_new("operator");
     mpc_parser_t* Expression = mpc_new("expression");
-    mpc_parser_t* Maili      = mpc_new("maili");
+    mpc_parser_t* Miali      = mpc_new("miali");
 
     /*define them with the following language*/
 
@@ -20,11 +20,11 @@ int main(int argc, char** argv) {
     "number    : /-?[0-9]+/                                       ; \
     operator   : '+' | '-' | '*' | '/' | '%%'                      ; \
     expression : <number> | '(' <operator> <expression> ')'       ; \
-    maili      : /^/ <operator> <expr>+ /$/                       ; \
-    ", Number, Operator, Expression, Maili);
+    miali      : /^/ <operator> <expr>+ /$/                       ; \
+    ", Number, Operator, Expression, Miali);
 
     mpc_result_t r;
-    if (mpc_parse("<stdin>", input, Maili, &r)) {
+    if (mpc_parse("<stdin>", input, Miali, &r)) {
         /* on success, print the AST */
         mpc_ast_print(r.output);
         mpc_ast_delete(r.output);
@@ -34,6 +34,6 @@ int main(int argc, char** argv) {
     }
 
     /* undefine and delete parsers */
-    mpc_cleanup(4, Number, Operator, Expression, Maili);
+    mpc_cleanup(4, Number, Operator, Expression, Miali);
     return 0;
 }
